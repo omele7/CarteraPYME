@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles1.3.css">
+    <title>Generar Reporte</title>
+</head>
+<body>
+    <div class="return"><a href="menu.html">Volver</a></div>
+    <div id="reporte-container"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('reporte-container');
+            const facturas = JSON.parse(localStorage.getItem('facturas')) || [];
+
+            if (facturas.length > 0) {
+                facturas.forEach(factura => {
+                    const V = parseFloat(factura.amount);
+                    const d = parseFloat(factura.interestRate) / 100;
+                    const issueDate = new Date(factura.issueDate);
+                    const discountDate = new Date(factura.discountDate);
+                    const t = Math.ceil((discountDate - issueDate) / (1000 * 60 * 60 * 24));
+
+                    const D = V * (d * t / 360);
+                    const MNeto = V - D;
+                    const TCEA = Math.pow((V / MNeto), (360 / t)) - 1;
+
+                    const facturaDiv = document.createElement('div');
+                    facturaDiv.classList.add('factura-card');
+                    facturaDiv.innerHTML = `
+                        <h2>Número de Factura: ${factura.invoiceNumber}</h2>
+                        <p>Monto: ${factura.amount}</p>
+                        <p>Fecha de Emisión: ${factura.issueDate}</p>
+                        <p>Fecha de Descuento: ${factura.discountDate}</p>
+                        <p>Tasa de Interés: ${factura.interestRate}%</p>
+                        <p>Plazo en días: ${t}</p>
+                        <button class="toggle-button">Mostrar Descuento</button>
+                        <div class="discount-info">
+                            <p>Descuento (D): ${D.toFixed(2)}</p>
+                        </div>
+                        <button class="toggle-net-button">Mostrar Monto Neto</button>
+                        <div class="net-info">
+                            <p>Monto Neto a recibir (MNeto): ${MNeto.toFixed(2)}</p>
+                        </div>
+                        <button class="toggle-cost-button">Mostrar Costo Total</button>
+                        <div class="cost-info">
+                            <p>Costo Total: ${D.toFixed(2)}</p>
+                        </div>
+                        <button class="toggle-tcea-button">Mostrar TCEA</button>
+                        <div class="tcea-info">
+                            <p>TCEA: ${(TCEA * 100).toFixed(2)}%</p>
+                        </div>
+                    `;
+                    container.appendChild(facturaDiv);
+                });
+                const discountButtons = document.querySelectorAll('.toggle-button');
+                discountButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const discountInfo = this.nextElementSibling;
+                        discountInfo.classList.toggle('show');
+                        if (discountInfo.classList.contains('show')) {
+                            this.textContent = 'Ocultar Descuento';
+                        } else {
+                            this.textContent = 'Mostrar Descuento';
+                        }
+                    });
+                });
+
+                const netButtons = document.querySelectorAll('.toggle-net-button');
+                netButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const netInfo = this.nextElementSibling;
+                        netInfo.classList.toggle('show');
+                        if (netInfo.classList.contains('show')) {
+                            this.textContent = 'Ocultar Monto Neto';
+                        } else {
+                            this.textContent = 'Mostrar Monto Neto';
+                        }
+                    });
+                });
+
+                const costButtons = document.querySelectorAll('.toggle-cost-button');
+                costButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const costInfo = this.nextElementSibling;
+                        costInfo.classList.toggle('show');
+                        if (costInfo.classList.contains('show')) {
+                            this.textContent = 'Ocultar Costo Total';
+                        } else {
+                            this.textContent = 'Mostrar Costo Total';
+                        }
+                    });
+                });
+
+                const tceaButtons = document.querySelectorAll('.toggle-tcea-button');
+                tceaButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const tceaInfo = this.nextElementSibling;
+                        tceaInfo.classList.toggle('show');
+                        if (tceaInfo.classList.contains('show')) {
+                            this.textContent = 'Ocultar TCEA';
+                        } else {
+                            this.textContent = 'Mostrar TCEA';
+                        }
+                    });
+                });
+                
+            } else {
+                container.innerHTML = '<p>No hay facturas registradas</p>';
+            }
+        });
+    </script>
+</body>
+</html>

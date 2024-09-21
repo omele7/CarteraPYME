@@ -1,0 +1,34 @@
+body {
+    background-color: #4f5e49;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    color: #e3e3e3;
+    font-size: 28px;
+    font-family: 'lucida sans';
+}
+
+.return {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ffffffe4;
+    padding: 10px 20px;
+    border: 3px solid #000;
+    border-radius: 10px;
+    font-family: serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.return a {
+    color: rgba(0, 0, 0, 0.837);
+    text-decoration: none;
+    font-family: sans-serif;
+}

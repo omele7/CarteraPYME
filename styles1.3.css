@@ -1,0 +1,92 @@
+body {
+    background-color: #4f5e49;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    color: #000000;
+    font-size: 28px;
+    font-family: 'lucida sans';
+}
+
+.return {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ffffffe4;
+    padding: 10px 20px;
+    border: 3px solid #000;
+    border-radius: 10px;
+    font-family: serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.return a {
+    color: rgba(0, 0, 0, 0.837);
+    text-decoration: none;
+    font-family: sans-serif;
+}
+
+#reporte-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.factura-card {
+    background-color: #ffffff;
+    border: 5px solid #000000;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.factura-card h2 {
+    margin-top: 0;
+    font-size: 27px;
+}
+
+.factura-card p {
+    margin: 10px 0;
+    font-size: 17px;
+}
+
+.toggle-button, .toggle-net-button, .toggle-cost-button, .toggle-tcea-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.toggle-button:hover, .toggle-net-button:hover, .toggle-cost-button:hover, .toggle-tcea-button:hover {
+    background-color: #45a049;
+}
+
+.discount-info, .net-info, .cost-info, .tcea-info {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+    opacity: 0;
+}
+
+.discount-info.show, .net-info.show, .cost-info.show, .tcea-info.show {
+    max-height: 200px;
+    opacity: 1;
+    transition: max-height 0.5s ease-in, opacity 0.5s ease-in;
+}

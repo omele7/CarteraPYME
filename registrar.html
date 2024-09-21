@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles2.css">
+    <title>Registro de facturas</title>
+</head>
+<body>
+    <div class="return"><a href="menu.html">Volver</a></div>
+    <div class="factura">
+        <label for="invoiceNumber" class="form-label">Número de Factura:</label>
+        <input type="text" id="invoiceNumber" name="invoiceNumber" required>
+        <br>
+        <label for="amount" class="form-label">Monto:</label>
+        <input type="number" id="amount" name="amount" step="0.01" required>
+        <br>
+        <label for="issueDate" class="form-label">Fecha de Emisión:</label>
+        <input type="date" id="issueDate" name="issueDate" required>
+        <br>
+        <label for="dueDate" class="form-label">Fecha de Vencimiento:</label>
+        <input type="date" id="dueDate" name="dueDate" required>
+        <br>
+        <label for="interestRate" class="form-label">Tasa de Interés (%):</label>
+        <input type="number" id="interestRate" name="interestRate" step="0.01" required>
+        <br>
+        <label for="discountDate" class="form-label">Fecha de Descuento:</label>
+        <input type="date" id="discountDate" name="discountDate" required>
+    </div>
+    <div class="register">
+        <input class="register" type="button" value="Registrar" onclick="registrarFactura()">
+    </div>
+    <script>
+        function registrarFactura() {
+            const invoiceNumber = document.getElementById('invoiceNumber').value;
+            const amount = document.getElementById('amount').value;
+            const issueDate = document.getElementById('issueDate').value;
+            const dueDate = document.getElementById('dueDate').value;
+            const interestRate = document.getElementById('interestRate').value;
+            const discountDate = document.getElementById('discountDate').value;
+            if (!invoiceNumber || !amount || !issueDate || !dueDate || !interestRate || !discountDate) {
+                alert('Por favor, complete todos los campos antes de registrar la factura.');
+                return;
+            }
+            const factura = {
+                invoiceNumber,
+                amount,
+                issueDate,
+                dueDate,
+                interestRate,
+                discountDate
+            };
+            let facturas = JSON.parse(localStorage.getItem('facturas')) || [];
+            facturas.push(factura);
+            localStorage.setItem('facturas', JSON.stringify(facturas));
+            window.location.href = 'registrocompleto.html';
+        }
+    </script>
+</body>
+</html>
