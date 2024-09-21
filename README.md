@@ -1,3 +1,3 @@
 # CarteraPYME
 
-Projecto realizado por almuno de la Universidad Peruana de Ciencias Aplicadas
+Proyecto realizado por alumnos de la Universidad Peruana de Ciencias Aplicadas.
